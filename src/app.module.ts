@@ -16,15 +16,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 			isGlobal: true,
 			envFilePath: `.env.${process.env.NODE_ENV}`,
 		}),
-		TypeOrmModule.forRootAsync({
-			inject: [ConfigService],
-			useFactory: (configService: ConfigService) => ({
-				type: "sqlite",
-				database: configService.get("DB_NAME"),
-				synchronize: true,
-				entities: [User, Report],
-			}),
-		}),
+		TypeOrmModule.forRoot(),
 		UsersModule,
 		ReportsModule,
 	],
@@ -40,11 +32,12 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 	],
 })
 export class AppModule {
+	constructor(private configService: ConfigService) {}
 	configure(consumer: MiddlewareConsumer) {
 		consumer
 			.apply(
 				cookieSession({
-					keys: ["h3849fh384"],
+					keys: [this.configService.get("COOKIE_KEY")],
 				})
 			)
 			.forRoutes("*");
