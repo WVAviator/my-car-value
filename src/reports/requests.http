@@ -1,0 +1,22 @@
+### Login as a user
+POST http://localhost:3000/auth/signin
+content-type: application/json
+
+{
+    "email": "ye@asdf.com",
+    "password": "asdf"
+}
+
+### Create a new report
+POST http://localhost:3000/reports/create
+content-type: application/json
+
+{
+    "make": "Toyota",
+    "model": "Corolla",
+    "year": 2014,
+    "mileage": 10000,
+    "latitude": 40.7128,
+    "longitude": -74.0059,
+    "price": 10000
+}
