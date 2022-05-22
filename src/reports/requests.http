@@ -13,10 +13,21 @@ content-type: application/json
 
 {
     "make": "Toyota",
-    "model": "Corolla",
-    "year": 2014,
+    "model": "Avalon",
+    "year": 2013,
     "mileage": 10000,
     "latitude": 40.7128,
     "longitude": -74.0059,
-    "price": 10000
+    "price": 13000
 }
+
+### Approve a report
+PATCH http://localhost:3000/reports/approve/7
+content-type: application/json
+
+{
+    "approved": true
+}
+
+### Get an estimate for an existing vehicle
+GET http://localhost:3000/reports/estimate?make=Toyota&model=Avalon&year=2014&latitude=40.7128&longitude=-74.0059&mileage=10000
